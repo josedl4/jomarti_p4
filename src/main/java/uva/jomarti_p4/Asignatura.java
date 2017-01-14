@@ -2,6 +2,7 @@ package uva.jomarti_p4;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Hashtable;
 
 @SuppressWarnings("unused")
 public class Asignatura {
@@ -86,6 +87,18 @@ public class Asignatura {
 	public double pesoRestante() {
 		// TODO Auto-generated method stub
 		return -1.0;
+	}
+
+
+	public Hashtable<String, Double> calificacionesParciales() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Hashtable<String, Double> calificacionesFinales() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

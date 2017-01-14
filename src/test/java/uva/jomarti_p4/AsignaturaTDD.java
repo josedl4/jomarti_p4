@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Hashtable;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +28,12 @@ public class AsignaturaTDD {
 		pruebaAux1 = new Prueba(new Date(), "Test 1", "Test del tema 1...", 10, 0.1);
 		pruebaAux2 = new Prueba(new Date(), "Examen Final", "Examen final de la asignatura",
 				10, 1);
+		
+		pruebaAux1.calificar("id001", 5, new Date());
+		pruebaAux1.calificar("id002", 9.5, new Date());
+		
+		pruebaAux2.calificar("id001", 5, new Date());
+		pruebaAux2.calificar("id002", 9.5, new Date());
 	}
 	
 	@Test
@@ -84,12 +91,20 @@ public class AsignaturaTDD {
 	
 	@Test
 	public void testListadoCalificacionesParcial() {
-		
+		asignaturaAux.addPrueba(pruebaAux1);
+		Hashtable<String, Double> tablaCalificaciones = new Hashtable<String, Double>();
+		tablaCalificaciones.put("id001", 5 * 0.1);
+		tablaCalificaciones.put("id002", 9.5 * 0.1);
+		assertEquals(tablaCalificaciones, asignaturaAux.calificacionesParciales());
 	}
 	
 	
 	@Test
 	public void testListadoCalificacionesFinal() {
-		
+		asignaturaAux.addPrueba(pruebaAux2);
+		Hashtable<String, Double> tablaCalificaciones = new Hashtable<String, Double>();
+		tablaCalificaciones.put("id001", 5.0 * 1);
+		tablaCalificaciones.put("id002", 9.5 * 1);
+		assertEquals(tablaCalificaciones, asignaturaAux.calificacionesFinales());
 	}
 }

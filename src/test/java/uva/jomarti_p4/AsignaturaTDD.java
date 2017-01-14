@@ -78,7 +78,7 @@ public class AsignaturaTDD {
 	@Test
 	public void testPesoRestante() {
 		asignaturaAux.addPrueba(pruebaAux1);
-		assertEquals(0.9, asignaturaAux.pesoRestante());
+		assertEquals(0.9, asignaturaAux.pesoRestante(), 0.005);
 	}
 	
 	

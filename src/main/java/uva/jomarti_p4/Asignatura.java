@@ -59,4 +59,33 @@ public class Asignatura {
 		return null;
 	}
 
+
+	public boolean esVacia() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	public int cantidadPruebas() {
+		// TODO Auto-generated method stub
+		return -1;
+	}
+
+
+	public void addPrueba(Prueba pruebaAux) {
+		// TODO Auto-generated method stub	
+	}
+
+
+	public ArrayList<Prueba> getListadoPruebas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public double pesoRestante() {
+		// TODO Auto-generated method stub
+		return -1.0;
+	}
+
 }

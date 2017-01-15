@@ -179,10 +179,10 @@
 
 	<target name="documentar" depends="compilar">
 		<javadoc sourcepath="src/main/java" destdir="doc/classes">
-    		<classpath refid="p3_jomarti_juablaz.classpath"/>
+    		<classpath refid="jomarti_p4.classpath"/>
 		</javadoc>
 		<javadoc sourcepath="src/test/java" destdir="doc/test-classes">
-        	<classpath refid="p3_jomarti_juablaz.classpath"/>
+        	<classpath refid="jomarti_p4.classpath"/>
 		</javadoc>
     </target>
 	<!-- ======================= -->

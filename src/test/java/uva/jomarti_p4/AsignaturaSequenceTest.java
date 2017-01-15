@@ -20,16 +20,10 @@ public class AsignaturaSequenceTest {
 	private Prueba pruebaTest2;
 	
 	@Mock
-	private Prueba pruebaTest2Bis;
-	
-	@Mock
 	private Prueba pruebaTest3;
 	
 	@Mock
 	private Prueba pruebaTest4;
-	
-	@Mock
-	private Prueba pruebaTest5;
 	
 	
 	private Asignatura asignaturaAux1, asignaturaAux2;
@@ -37,7 +31,6 @@ public class AsignaturaSequenceTest {
 	private Hashtable<String, Double> listado2 = new Hashtable<String, Double>();
 	private Hashtable<String, Double> listado3 = new Hashtable<String, Double>();
 	private Hashtable<String, Double> listado4 = new Hashtable<String, Double>();
-	private Hashtable<String, Double> listado5 = new Hashtable<String, Double>();
 	
 	
 	@Before
@@ -67,9 +60,6 @@ public class AsignaturaSequenceTest {
 		listado4.put("id003", 80.0);
 		listado4.put("id004", 50.0);
 		
-		listado5.put("id005", 7.4);
-		listado5.put("id006", 6.0);
-		listado5.put("id007", 9.4);
 	}
 	
 	@Before
@@ -96,17 +86,6 @@ public class AsignaturaSequenceTest {
 		expect(pruebaTest2.isCompletamenteCalificada()).andReturn(true).anyTimes();
 		expect(pruebaTest2.getCalificaciones()).andReturn(listado2).anyTimes();
 		
-		pruebaTest2Bis = createMock(Prueba.class);
-		expect(pruebaTest2Bis.getNombre()).andReturn("Test tema 2").anyTimes();
-		expect(pruebaTest2Bis.getDescripcion()).andReturn("Test sobre el tema 2"
-				+ " de la asignatura...").anyTimes();
-		expect(pruebaTest2Bis.getNotaMax()).andReturn(5.0).anyTimes();
-		expect(pruebaTest2Bis.getPeso()).andReturn(0.2).anyTimes();
-		expect(pruebaTest2Bis.getFecha()).andReturn(
-				new GregorianCalendar(2016, 11, 2).getTime()).anyTimes();
-		expect(pruebaTest2Bis.isCompletamenteCalificada()).andReturn(true).anyTimes();
-		expect(pruebaTest2Bis.getCalificaciones()).andReturn(new Hashtable<String, Double>()).anyTimes();
-		
 		pruebaTest3 = createMock(Prueba.class);
 		expect(pruebaTest3.getNombre()).andReturn("Test tema 3").anyTimes();
 		expect(pruebaTest3.getDescripcion()).andReturn("Test sobre el tema 3"
@@ -129,23 +108,10 @@ public class AsignaturaSequenceTest {
 		expect(pruebaTest4.isCompletamenteCalificada()).andReturn(true).anyTimes();
 		expect(pruebaTest4.getCalificaciones()).andReturn(listado4).anyTimes();
 		
-		pruebaTest5 = createMock(Prueba.class);
-		expect(pruebaTest5.getNombre()).andReturn("Examen Final 100%").anyTimes();
-		expect(pruebaTest5.getDescripcion()).andReturn("Examen unico"
-				+ " de la asignatura...").anyTimes();
-		expect(pruebaTest5.getNotaMax()).andReturn(10.0).anyTimes();
-		expect(pruebaTest5.getPeso()).andReturn(1.0).anyTimes();
-		expect(pruebaTest5.getFecha()).andReturn(
-				new GregorianCalendar(2017, 1, 16).getTime()).anyTimes();
-		expect(pruebaTest5.isCompletamenteCalificada()).andReturn(true).anyTimes();
-		expect(pruebaTest5.getCalificaciones()).andReturn(listado5).anyTimes();
-		
 		replay(pruebaTest1);
 		replay(pruebaTest2);
-		replay(pruebaTest2Bis);
 		replay(pruebaTest3);
 		replay(pruebaTest4);
-		replay(pruebaTest5);
 	}
 	
 	

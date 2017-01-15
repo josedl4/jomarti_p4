@@ -179,7 +179,7 @@ public class Asignatura {
 			double notaPrueba = p.getNotaMax();
 			double pesoPrueba = p.getPeso();
 			
-			for (Entry<String, Double> entry : p.calificaciones.entrySet()) {
+			for (Entry<String, Double> entry : p.getCalificaciones().entrySet()) {
 				if(listadoCalificaciones.containsKey(entry.getKey()))
 					listadoCalificaciones.put(entry.getKey(), 
 							listadoCalificaciones.get(entry.getKey())

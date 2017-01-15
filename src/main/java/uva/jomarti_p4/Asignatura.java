@@ -167,7 +167,7 @@ public class Asignatura {
 		for(Prueba p : pruebas)
 			pesoRestante -= p.getPeso();
 		
-		return pesoRestante;
+		return ((double)Math.round(pesoRestante*100))/100;
 	}
 
 

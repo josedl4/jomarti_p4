@@ -104,7 +104,7 @@ public class TestWithMockObjects {
 		expect(pruebaTest2Bis.getPeso()).andReturn(0.2).anyTimes();
 		expect(pruebaTest2Bis.getFecha()).andReturn(
 				new GregorianCalendar(2016, 11, 2).getTime()).anyTimes();
-		expect(pruebaTest2Bis.isCompletamenteCalificada()).andReturn(true).anyTimes();
+		expect(pruebaTest2Bis.isCompletamenteCalificada()).andReturn(false).anyTimes();
 		expect(pruebaTest2Bis.getCalificaciones()).andReturn(new Hashtable<String, Double>()).anyTimes();
 		
 		pruebaTest3 = createMock(Prueba.class);
@@ -353,7 +353,7 @@ public class TestWithMockObjects {
 	}
 	
 	
-	@Test(expected=IllegalStateException.class)
+	@Test
 	public void testListadoCalificacionesFinalesVariasPruebas() {
 		asignaturaAux.addPrueba(pruebaTest1);
 		asignaturaAux.addPrueba(pruebaTest2);

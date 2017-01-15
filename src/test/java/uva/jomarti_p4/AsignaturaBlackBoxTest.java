@@ -162,6 +162,7 @@ public class AsignaturaBlackBoxTest {
 		asignaturaAux.calificacionesFinales();
 	}
 	
+	
 	@Test(expected=IllegalStateException.class)
 	public void testListadoCalificacionesFinalesSinPesoNecesario() {
 		asignaturaAux.addPrueba(pruebaAux1);

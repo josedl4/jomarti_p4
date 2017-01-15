@@ -1,4 +1,4 @@
-# Practica 3 de Tecnologias para el Desarrollo de Software
+# Practica 4 de Tecnologias para el Desarrollo de Software
 
 #### Autor:
 * Jose Luis Martín Martín  -    _jomarti_
@@ -29,3 +29,8 @@
     * _javancss_ - Informe de complejidad ciclomática.
     * _jacoco_ - Code To Test Ratio.
     * _cobertura_ - Informe de cobertura.
+    
+#### Otras aclaraciones:
+* Los test TDD y de caja negra realizados en las fase Red del ciclo Red - Green - Refactor, no aparecen en la cabeza del repositorio ya que se eliminaron en la fase Green ya que todos los test que empleamos son en aislamiento debido al que estamos desarrollando solo una parte del problema y las pruebas están obligadas a depender de Mock Objects.
+* El estado final de las fases correspondientes del ciclo Red - Green - Refactor, pueden verse en el ultimo commit de la rama correspondiente a dicha fase.
+* Los targets de Ant se han adaptado de la practica anterior, sin embargo el correspondiente a los test TDD y de caja negra nos están habilitados en esta practica.

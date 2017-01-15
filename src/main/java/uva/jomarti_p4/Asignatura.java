@@ -103,7 +103,7 @@ public class Asignatura {
 	 */
 	public boolean esVacia() {
 		// TODO Auto-generated method stub
-		return false;
+		return false;		// Fake Implementation
 	}
 
 
@@ -127,6 +127,8 @@ public class Asignatura {
 	 * @throws IllegalArgumentException Si la prueba pasada como argumento ya esta asociada.
 	 * @throws IllegalArgumentException Si la prueba pasada como argumento excede la suma de
 	 * todos los pesos de las distintas pruebas. 
+	 * @throws IllegalArgumentException Si la fecha de la prueba esta fuera del rango de la
+	 * fecha de la asignatura.
 	 */
 	public void addPrueba(Prueba prueba) {
 		// TODO Auto-generated method stub	

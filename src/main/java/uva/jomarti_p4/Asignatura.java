@@ -3,8 +3,8 @@ package uva.jomarti_p4;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
+import java.util.Map.Entry;
 
-@SuppressWarnings("unused")
 public class Asignatura {
 	
 	private String nombre;
@@ -36,7 +36,17 @@ public class Asignatura {
 	 */
 	public Asignatura(String nombre, String descripcion, double calificacionMax,
 			GregorianCalendar fechaInicio, GregorianCalendar fechaFin) {
-		// TODO Auto-generated constructor stub
+		if(nombre == null || descripcion == null || calificacionMax <= 0
+				|| fechaInicio == null || fechaFin == null) 
+			throw new IllegalArgumentException("Los paramatro para crear la asignatura no son correctos.");
+		if(fechaFin.before(fechaInicio))
+			throw new IllegalArgumentException("Las fechas no son correctas al crear la noticia.");
+		
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.calificacionMax = calificacionMax;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
 	}
 
 
@@ -46,8 +56,7 @@ public class Asignatura {
 	 * @return nombre Nombre de la signatura.
 	 */
 	public String getNombre() {
-		// TODO Auto-generated method stub
-		return null;
+		return nombre;
 	}
 
 
@@ -58,7 +67,7 @@ public class Asignatura {
 	 */
 	public String getDescripcion() {
 		// TODO Auto-generated method stub
-		return null;
+		return descripcion;
 	}
 
 
@@ -68,8 +77,7 @@ public class Asignatura {
 	 * @return notaMax Nota maxima de la asignatura.
 	 */
 	public double getCalificacionMax() {
-		// TODO Auto-generated method stub
-		return 0;
+		return calificacionMax;
 	}
 
 	
@@ -79,8 +87,7 @@ public class Asignatura {
 	 * @return fechaInicio Fecha de inicio de la asignatura.
 	 */
 	public GregorianCalendar getFechaInicio() {
-		// TODO Auto-generated method stub
-		return null;
+		return fechaInicio;
 	}
 
 
@@ -90,8 +97,7 @@ public class Asignatura {
 	 * @return fechaFin Fecha de fin de la asignatura.
 	 */
 	public GregorianCalendar getFechaFin() {
-		// TODO Auto-generated method stub
-		return null;
+		return fechaFin;
 	}
 
 
@@ -102,8 +108,7 @@ public class Asignatura {
 	 * @return result Estado de estar vacia.
 	 */
 	public boolean esVacia() {
-		// TODO Auto-generated method stub
-		return false;		// Fake Implementation
+		return pruebas.isEmpty();
 	}
 
 
@@ -113,8 +118,7 @@ public class Asignatura {
 	 * @return result Cantidad pruebas asociadas.
 	 */
 	public int cantidadPruebas() {
-		// TODO Auto-generated method stub
-		return -1;
+		return pruebas.size();
 	}
 
 
@@ -131,7 +135,13 @@ public class Asignatura {
 	 * fecha de la asignatura.
 	 */
 	public void addPrueba(Prueba prueba) {
-		// TODO Auto-generated method stub	
+		if(prueba == null || pruebas.contains(prueba) || prueba.getPeso() 
+				> pesoRestante())
+			throw new IllegalArgumentException("La prueba que se quiere añadir no es valida.");
+		if(prueba.getFecha().before(fechaInicio.getTime()) 
+				|| prueba.getFecha().after(fechaFin.getTime()))
+			throw new IllegalArgumentException("La fecha de la prueba no es valida.");
+		pruebas.add(prueba);
 	}
 
 
@@ -141,8 +151,7 @@ public class Asignatura {
 	 * @return listadoPruebas Listado de las pruebas asociadas a la asignatura.
 	 */
 	public ArrayList<Prueba> getListadoPruebas() {
-		// TODO Auto-generated method stub
-		return null;
+		return pruebas;
 	}
 
 
@@ -153,8 +162,12 @@ public class Asignatura {
 	 * @return pesoRestante Peso restante para alcanzar el valor 1 entre las disitintas pruebas.
 	 */
 	public double pesoRestante() {
-		// TODO Auto-generated method stub
-		return -1.0;
+		double pesoRestante = 1;
+		
+		for(Prueba p : pruebas)
+			pesoRestante -= p.getPeso();
+		
+		return ((double)Math.round(pesoRestante*100))/100;
 	}
 
 
@@ -166,8 +179,25 @@ public class Asignatura {
 	 * se llama a la función.
 	 */
 	public Hashtable<String, Double> calificacionesParciales() {
-		// TODO Auto-generated method stub
-		return null;
+		Hashtable<String, Double> listadoCalificaciones = new Hashtable<String, Double>();
+		
+		for (Prueba p : pruebas) {
+			double notaPrueba = p.getNotaMax();
+			double pesoPrueba = p.getPeso();
+			
+			for (Entry<String, Double> entry : p.getCalificaciones().entrySet()) {
+				if(listadoCalificaciones.containsKey(entry.getKey()))
+					listadoCalificaciones.put(entry.getKey(), 
+							((double)Math.round(100*(listadoCalificaciones.get(entry.getKey())
+							+ ((entry.getValue()/notaPrueba) * pesoPrueba * getCalificacionMax())))/100));
+				else
+					listadoCalificaciones.put(entry.getKey(), 
+							((double)Math.round(100*(((entry.getValue()/notaPrueba) 
+									* pesoPrueba * getCalificacionMax())))/100));
+			}
+		}
+		
+		return listadoCalificaciones;
 	}
 
 
@@ -183,8 +213,16 @@ public class Asignatura {
 	 * @throws IllegalStateException Si el conjunto de pruebas no suma un peso de valor 1.
 	 * @throws IllegalStateException Si no todas las asignaturas se han calificado por completo.
 	 */
-	public Hashtable<String, Double> calificacionesFinales() {
-		// TODO Auto-generated method stub
-		return null;
+	public Hashtable<String, Double> calificacionesFinales() throws IllegalStateException {
+		if (pesoRestante() != 0.0)
+			throw new IllegalStateException("La asignatura aun no tiene todo el peso"
+					+ " repartido entre las pruebas.");
+		
+		for (Prueba p : pruebas) {
+			if (!p.isCompletamenteCalificada())
+				throw new IllegalStateException("Alguna de las pruebas no ta calificada completamente.");
+		}
+		
+		return calificacionesParciales();
 	}
 }

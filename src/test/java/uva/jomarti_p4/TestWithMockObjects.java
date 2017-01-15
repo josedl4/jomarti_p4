@@ -235,7 +235,7 @@ public class TestWithMockObjects {
 	
 	
 	@Test
-	public void testAñadirAsignatura() {
+	public void testAddPrueba() {
 		asignaturaAux.addPrueba(pruebaTest1);
 		assertFalse(asignaturaAux.esVacia());
 		assertEquals(1, asignaturaAux.cantidadPruebas());

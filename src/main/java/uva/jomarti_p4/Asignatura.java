@@ -5,6 +5,14 @@ import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.Map.Entry;
 
+
+/**
+ * Representacion de una asignatura, que almacena las distintas pruebas que la 
+ * componen y permite generar listas de calificaciones para los alumnos presentados
+ * tanto parciales como finales.
+ * 
+ * @author jomarti
+ */
 public class Asignatura {
 	
 	private String nombre;

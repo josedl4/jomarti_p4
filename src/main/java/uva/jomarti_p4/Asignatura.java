@@ -36,8 +36,8 @@ public class Asignatura {
 	 */
 	public Asignatura(String nombre, String descripcion, double calificacionMax,
 			GregorianCalendar fechaInicio, GregorianCalendar fechaFin) {
-		if(nombre.equals(null) || descripcion.equals(null) || calificacionMax <= 0
-				|| fechaInicio.equals(null) || fechaFin.equals(null)) 
+		if(nombre == null || descripcion == null || calificacionMax <= 0
+				|| fechaInicio == null || fechaFin == null) 
 			throw new IllegalArgumentException("Los paramatro para crear la asignatura no son correctos.");
 		if(fechaFin.before(fechaInicio))
 			throw new IllegalArgumentException("Las fechas no son correctas al crear la noticia.");
@@ -135,7 +135,13 @@ public class Asignatura {
 	 * fecha de la asignatura.
 	 */
 	public void addPrueba(Prueba prueba) {
-		// TODO Auto-generated method stub	
+		if(prueba == null || pruebas.contains(prueba) || prueba.getPeso() 
+				> pesoRestante())
+			throw new IllegalArgumentException("La prueba que se quiere añadir no es valida.");
+		if(prueba.getFecha().before(fechaInicio.getTime()) 
+				|| prueba.getFecha().after(fechaFin.getTime()))
+			throw new IllegalArgumentException("La fecha de la prueba no es valida.");
+		pruebas.add(prueba);
 	}
 
 
@@ -156,12 +162,12 @@ public class Asignatura {
 	 * @return pesoRestante Peso restante para alcanzar el valor 1 entre las disitintas pruebas.
 	 */
 	public double pesoRestante() {
-		double pesoRestante = 0;
+		double pesoRestante = 1;
 		
 		for(Prueba p : pruebas)
-			pesoRestante += p.getPeso();
+			pesoRestante -= p.getPeso();
 		
-		return pesoRestante;
+		return ((double)Math.round(pesoRestante*100))/100;
 	}
 
 
@@ -179,14 +185,15 @@ public class Asignatura {
 			double notaPrueba = p.getNotaMax();
 			double pesoPrueba = p.getPeso();
 			
-			for (Entry<String, Double> entry : p.calificaciones.entrySet()) {
+			for (Entry<String, Double> entry : p.getCalificaciones().entrySet()) {
 				if(listadoCalificaciones.containsKey(entry.getKey()))
 					listadoCalificaciones.put(entry.getKey(), 
-							listadoCalificaciones.get(entry.getKey())
-							+ ((entry.getValue()/notaPrueba) * pesoPrueba * getCalificacionMax()));
+							((double)Math.round(100*(listadoCalificaciones.get(entry.getKey())
+							+ ((entry.getValue()/notaPrueba) * pesoPrueba * getCalificacionMax())))/100));
 				else
 					listadoCalificaciones.put(entry.getKey(), 
-							(entry.getValue()/notaPrueba) * pesoPrueba * getCalificacionMax());
+							((double)Math.round(100*(((entry.getValue()/notaPrueba) 
+									* pesoPrueba * getCalificacionMax())))/100));
 			}
 		}
 		

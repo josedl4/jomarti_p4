@@ -24,7 +24,7 @@
         <path refid="jomarti_p4.classpath"/>
         <path refid="Maven Dependencies.libraryclasspath"/>
 	</path>
-	<path id="run.TestWithMockObjets.classpath">
+	<path id="run.TestWithMockObjects.classpath">
         <path refid="jomarti_p4.classpath"/>
         <path refid="Maven Dependencies.libraryclasspath"/>
 	</path>

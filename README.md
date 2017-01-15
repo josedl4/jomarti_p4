@@ -11,7 +11,7 @@
 #### Targets de Ant:
 * **_ant compilar_** - Obtención de las dependencias y generación de los ficheros .class para la realización de los test.
 * **_ant ejecutarTodo_** - Realizaremos la ejecución de todos los test.
-* **_ant ejecutarTestsTDD_** - Ejecutar solo test de TDD y de caja negra.
+* **_ant ejecutarTestsTDD_** - Ejecutar solo test de TDD y de caja negra (No valido en este caso, al no mantenerse los test de TDD en las siguientes fases).
 * **_ant ejecutarTestEnAislamiento_** - Ejecutar test en asilamiento y de caja blanca.
 * **_ant ejecutarPruebasSecuencia_** - Ejecutar test de secuencia.
 * **_ant obtenerInformeCobertura_** - Obtener informe de cobertura

@@ -149,6 +149,14 @@
         </junit>
     </target>
 
+	<target name="ejecutarTestTDD" depends="compilar">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+        	<formatter type="xml"/>
+            <test name="uva.jomarti_p4.TestWithMockObjects" todir="${junit.output.dir}"/>
+            <classpath refid="run.TestWithMockObjects.classpath"/>
+        </junit>
+    </target>
 
 	<target name="ejecutarTestEnAislamiento" depends="compilar">
         <mkdir dir="${junit.output.dir}"/>
